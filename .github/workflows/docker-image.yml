@@ -25,8 +25,8 @@ jobs:
       - name: Build and push 
         working-directory: ./src/web
         run: |
-          docker build . -t  ${{ image_name }} 
-          docker push  ${{ image_name }}
+          docker build . -t  $image_name
+          docker push  $image_name
           
   deploy:
       name: 'Terraform'
