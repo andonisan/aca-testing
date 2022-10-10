@@ -36,7 +36,7 @@ jobs:
         ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
         TERRAFORM_VERSION: "1.3.1"
         TERRFAORM_WORKING_DIR: './deploy/1_aca_web'
-        
+        feature_name: pr_${{ github.event.pull_request.title }}
         
       runs-on: ubuntu-latest
       environment: production
@@ -47,12 +47,6 @@ jobs:
           shell: bash
 
       steps:
-      - name: feature name
-        run: 
-            feature_name=${{ github.event.pull_request.title }}
-            feature_name=${feature_name//[/]/-}
-            echo "feature_name=$feature_name" >> $GITHUB_ENV
-            
       - name: Checkout
         uses: actions/checkout@v3
 
