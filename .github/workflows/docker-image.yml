@@ -83,9 +83,9 @@ jobs:
           tf_actions_subcommand: 'apply'
           tf_actions_working_dir: './deploy/1_aca_web'
         env:
-          TF_VAR_feature_name:  $image_name
-          TF_VAR_image_name:  $image_name
-          TF_VAR_app_name: $app_name
+          TF_VAR_feature_name:  "$feature_name"
+          TF_VAR_image_name:  "$image_name"
+          TF_VAR_app_name: "$app_name"
 
        
          
