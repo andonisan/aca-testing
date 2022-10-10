@@ -7,10 +7,12 @@ on:
 env:
   registry_name: andoniacr.azurecr.io
   app_name: web
-  image_name: ${{ env.registry_name }}/${{ env.app_name }}:${{ github.sha }}
+  
 jobs:
   build:
     runs-on: ubuntu-latest
+    env: 
+      image_name: ${{ env.registry_name }}/${{ env.app_name }}:${{ github.sha }}
     steps:
       - uses: actions/checkout@v3
       
@@ -36,6 +38,7 @@ jobs:
         TERRAFORM_VERSION: 1.3.1
         TERRFAORM_WORKING_DIR : "./deploy/aca_web"
         feature_name: ${{ github.event.pull_request.title }}
+        image_name: ${{ env.registry_name }}/${{ env.app_name }}:${{ github.sha }}
         
       runs-on: ubuntu-latest
       environment: production
