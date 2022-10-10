@@ -50,8 +50,8 @@ jobs:
       - name: feature name
         run: 
             feature_name=${{ github.event.pull_request.title }}
-            TF_VAR_feature_name=${feature_name//[/]/-}
-            echo "TF_VAR_feature_name=$TF_VAR_feature_name" >> $GITHUB_ENV
+            feature_name=${feature_name//[/]/-}
+            echo "feature_name=$feature_name" >> $GITHUB_ENV
             
       - name: Checkout
         uses: actions/checkout@v3
@@ -79,6 +79,7 @@ jobs:
         env:
          TF_VAR_image_name:  ${{ env.image_name }}
          TF_VAR_app_name: ${{ env.app_name }}
+         TF_VAR_feature_name : ${{ env.feature_name }}
 
       - name: Terraform Apply
         uses: hashicorp/terraform-github-actions@master
@@ -89,6 +90,7 @@ jobs:
         env:
          TF_VAR_image_name:  ${{ env.image_name }}
          TF_VAR_app_name: ${{ env.app_name }}
+         TF_VAR_feature_name : ${{ env.feature_name }}
 
 
        
