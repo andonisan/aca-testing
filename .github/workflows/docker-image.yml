@@ -6,24 +6,26 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  registry_name: andoniacr.azurecr.io
+  repository_name: web
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-     AZURE_ACR: andoniacr.azurecr.io
     steps:
       - uses: actions/checkout@v3
       
       - uses: azure/docker-login@v1
         with:
-          login-server: ${AZURE_ACR}
+          login-server: ${{ env.registry_name }}
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
           
       - name: Build and push 
         working-directory: ./src/web
         run: |
-          docker build . -t ${AZURE_ACR}/web:${{ github.sha }} 
-          docker push ${AZURE_ACR}/web:${{ github.sha }}
+          docker build . -t  ${{ env.registry_name }}/${{ env.repository_name }}:${{ github.sha }} 
+          docker push  ${{ env.registry_name }}/${{ env.repository_name }}:${{ github.sha }}
 
          
