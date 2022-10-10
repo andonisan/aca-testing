@@ -15,7 +15,7 @@ jobs:
       
       - uses: azure/docker-login@v1
         with:
-          login-server: ${{ env.registry_name }}
+          login-server: "andoniacr.azurecr.io"
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
           
