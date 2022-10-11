@@ -385,3 +385,4 @@ override.tf.json
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
 /deploy/1_aca_web/.terraform.lock.hcl
+/deploy/0_core/.terraform.lock.hcl
