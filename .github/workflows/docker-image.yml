@@ -55,7 +55,7 @@ jobs:
       
         - name: Terraform Init
           id: init
-          run: terraform init
+          run: terraform init -backend-config="key=${{ env.feature_name }}"
       
         - name: Terraform Validate
           id: validate
@@ -71,7 +71,7 @@ jobs:
 
         - name: Terraform Apply
           id: apply
-          run: terraform apply 
+          run:  terraform apply --auto-approve
           env:
             TF_VAR_image_name: ${{ env.image_name }}
             TF_VAR_app_name: ${{ env.app_name }}
