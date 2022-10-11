@@ -69,9 +69,9 @@ jobs:
             TF_VAR_app_name: ${{ env.app_name }}
             TF_VAR_feature_name: ${{ env.feature_name }}
 
-        - name: Terraform Plan
+        - name: Terraform Apply
           id: apply
-          run: terraform plan 
+          run: terraform apply 
           env:
             TF_VAR_image_name: ${{ env.image_name }}
             TF_VAR_app_name: ${{ env.app_name }}
