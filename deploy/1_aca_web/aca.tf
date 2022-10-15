@@ -13,7 +13,7 @@ resource "azapi_resource" "containerapp" {
   body = jsonencode({
     properties = {
       managedEnvironmentId = data.azapi_resource.aca_env.id
-      configuration        = {
+      configuration = {
         ingress = {
           external : true,
           targetPort : 80
@@ -27,7 +27,7 @@ resource "azapi_resource" "containerapp" {
         ],
         secrets : [
           {
-            name = "registry-password"
+            name  = "registry-password"
             value = data.azurerm_container_registry.acr.admin_password
           }
         ]
@@ -35,8 +35,8 @@ resource "azapi_resource" "containerapp" {
       template = {
         containers = [
           {
-            image     = var.image_name
-            name      = var.app_name
+            image = var.image_name
+            name  = var.app_name
             resources = {
               cpu    = 0.25
               memory = "0.5Gi"
