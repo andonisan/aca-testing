@@ -5,31 +5,10 @@ on:
     branches: [ "main" ]
     types: [closed]
 
-env:
-  image_name: "andoniacr.azurecr.io/web:${{ github.sha }}"
-  app_name: "web"
-
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: azure/docker-login@v1
-        with:
-          login-server: "andoniacr.azurecr.io"
-          username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.ACR_PASSWORD }}
-
-      - name: Build and push
-        working-directory: ./src/web
-        run: |
-          docker build . -t  $image_name
-          docker push  $image_name
-  
-  deploy:
+  if: github.event.pull_request.merged == true
+  destroy:
     name: 'Terraform'
-    needs: build
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
@@ -62,17 +41,9 @@ jobs:
         id: validate
         run: terraform validate
 
-      - name: Terraform Plan
-        id: plan
-        run: terraform plan
-        env:
-          TF_VAR_image_name: ${{ env.image_name }}
-          TF_VAR_app_name: ${{ env.app_name }}
-          TF_VAR_feature_name: ${{ env.feature_name }}
-
-      - name: Terraform Apply
+      - name: Terraform Destroy
         id: apply
-        run:  terraform apply --auto-approve
+        run:  terraform destroy --auto-approve
         env:
           TF_VAR_image_name: ${{ env.image_name }}
           TF_VAR_app_name: ${{ env.app_name }}
