@@ -1,3 +1,3 @@
 # aca-testing
 
-pull request tests with nre flow
+pull request tests with new flow
