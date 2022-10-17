@@ -8,6 +8,7 @@ env:
   registry_name: andoniacr.azurecr.io
   app_name: web
   image_name: ${{ env.registry_name }}/${{ env.app_name }}:${{ github.sha }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
