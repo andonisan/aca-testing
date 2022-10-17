@@ -2,7 +2,9 @@ name: Pull request create environment
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - deploy
+    types: [closed]
 
 env:
   image_name: "andoniacr.azurecr.io/web:${{ github.sha }}"
