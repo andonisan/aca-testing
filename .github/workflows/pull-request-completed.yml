@@ -6,7 +6,7 @@ on:
     types: [closed]
 
 jobs:
-  if: github.event.pull_request.merged == true
+  
   destroy:
     name: 'Terraform'
     env:
@@ -15,7 +15,8 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
       feature_name: pr-${{ github.event.pull_request.number }}
-    
+      
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     environment: production
     
