@@ -386,3 +386,6 @@ override.tf.json
 # example: *tfplan*
 /deploy/1_aca_web/.terraform.lock.hcl
 /deploy/0_core/.terraform.lock.hcl
+
+
+local.env
